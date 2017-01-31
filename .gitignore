@@ -1,6 +1,10 @@
 # elm-package generated files
 elm-stuff
 
+__pycache__
+
+index.html
+
 # elm-repl generated files
 repl-temp-*
 
