@@ -32,3 +32,6 @@ def question_create():
 def question_details(question_id):
   question = Question.query.filter_by(id=question_id).first_or_404()
   return question.as_json()
+
+if __name__ == '__main__':
+    app.run()

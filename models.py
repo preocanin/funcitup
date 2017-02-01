@@ -18,3 +18,16 @@ class Question(db.Model, BasicModel):
   title = db.Column(db.String(128))
 
   text = db.Column(db.String(512))
+
+  answers = db.relationship('Answer', backref='question', lazy='dynamic')
+
+class Answer(db.Model, BasicModel):
+  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+  is_correct = db.Column(db.Boolean)
+
+  text = db.Column(db.String(512))
+
+  question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+
+
