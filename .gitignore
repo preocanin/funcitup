@@ -3,7 +3,7 @@ elm-stuff
 
 __pycache__
 
-index.html
+static/elm.js
 
 # elm-repl generated files
 repl-temp-*
