@@ -2,7 +2,7 @@ module Model.Questions exposing (..)
 
 import List exposing (map)
 
-import Json.Decode as Decode exposing (Decoder, null, list, map3, field)
+import Json.Decode as Decode exposing (Decoder, oneOf, null, list, map3, field)
 import Json.Encode as Encode exposing (Value, list, int, object)
 
 import Model.Question as Question exposing (..)
@@ -20,7 +20,7 @@ newQuestions = Model [] [] 0
 questionsDecoder : Decode.Decoder Model
 questionsDecoder =
     Decode.map3 Model
-        (Decode.field "questions" <| Decode.list Question.questionDecoder)
+        (Decode.field "questions" <| oneOf [Decode.list Question.questionDecoder, null []])
         (Decode.field "userAnswers" <| Decode.null [])
         (Decode.field "currentQuestion" <| Decode.null 0)
 
