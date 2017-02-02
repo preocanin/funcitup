@@ -1,5 +1,4 @@
 __pycache__
-
 static/elm.js
 node_modules
 # elm-package generated files
@@ -11,6 +10,8 @@ repl-temp-*
 # vim swap files 
 *.swp
 *.swo
+
+.vscode/
 
 # vim temporary files
 *~

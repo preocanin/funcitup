@@ -21,5 +21,6 @@ sequelize.sync({force: true});
 
 module.exports = {
   Answer: Answer,
-  Question: Question
+  Question: Question,
+  sequelize: sequelize
 }
