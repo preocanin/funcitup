@@ -8,7 +8,7 @@ type alias Model =
     {
         id: Int,
         text: String,
-        answerrs: List Answer.Model
+        answers: List Answer.Model
     }
 
 newQuestion : Model
