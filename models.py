@@ -17,8 +17,6 @@ class Question(db.Model, BasicModel):
 
   title = db.Column(db.String(128))
 
-  text = db.Column(db.String(512))
-
   answers = db.relationship('Answer', backref='question', lazy='dynamic')
 
 class Answer(db.Model, BasicModel):
@@ -30,4 +28,10 @@ class Answer(db.Model, BasicModel):
 
   question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
 
+class Scores(db.Model, BasicModel):
+  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+  name = db.Column(db.String(50))
+
+  score = db.Column(db.Integer)
 
