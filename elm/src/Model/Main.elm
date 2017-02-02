@@ -1,14 +1,15 @@
 module Model.Main exposing (..)
 
 import Msg.Main exposing (..)
+import Model.Navigation exposing (..)
 
 type alias Model =
         { 
-            page: String
+            page: Page
         }
 
 initialModel : Model
-initialModel = Model "Home"
+initialModel = Model Home
 
 init : (Model, Cmd Msg)
 init = (initialModel, Cmd.none)

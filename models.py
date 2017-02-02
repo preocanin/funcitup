@@ -15,8 +15,6 @@ class Question(db.Model, BasicModel):
     # Columns
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-  title = db.Column(db.String(128))
-
   text = db.Column(db.String(512))
 
   answers = db.relationship('Answer', backref='question', lazy='dynamic')
