@@ -1,7 +1,7 @@
 module View.Main exposing (..)
 
 import Html exposing (Html, div, text)
-
+import Model.Navigation exposing (..)
 import View.Navigation exposing (..)
 
 import Msg.Main exposing (..)
@@ -9,13 +9,8 @@ import Model.Main exposing (..)
 
 view : Model -> Html Msg
 view model =
-    div []
-        [
-            navigation model,
-            if model.page == "Home" then
-                div [] [text "Home"]
-            else if model.page == "Quiz" then
-                div [] [text "Quiz"]
-            else
-                div [] [text "Theory"]
-        ]
+    case model.page of
+        Home -> div [] [ navigation model, text "Home"]
+        Quiz -> div [] [ navigation model, text "Quiz"]
+        Theory -> div [] [ navigation model, text "Theory"]
+        PageNotFound -> div [] [text "page not found"]
