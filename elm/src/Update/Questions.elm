@@ -13,5 +13,5 @@ updateQuestions msg model =
         AllQuestions (Ok questionsModel) -> 
             ({model | page = Quiz, modelForQuestions = questionsModel}, Cmd.none) 
         AllQuestions (Err error) ->
-            ({model | page = PageNotFound, modelForQuestions = newQuestions}, Cmd.none)
+            ({model | page = Home, modelForQuestions = newQuestions}, Cmd.none)
 
