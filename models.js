@@ -14,7 +14,7 @@ var Answer = sequelize.define('answer', {
   isCorrect : Sequelize.BOOLEAN
 });
 
-Answer.belongsTo(Question); // Adds fk_company to User
+Answer.belongsTo(Question);
 Question.hasMany(Answer)
 
 sequelize.sync({force: true});

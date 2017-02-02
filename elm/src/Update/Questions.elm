@@ -11,7 +11,7 @@ updateQuestions : Questions.Msg -> Model.Main.Model -> (Model.Main.Model, Cmd Ma
 updateQuestions msg model =
     case msg of
         AllQuestions (Ok questionsModel) -> 
-            ({model | page = Quiz, modelForQuestions = questionsModel}, Cmd.none) 
+            ({model | page = Theory }, Cmd.none) 
         AllQuestions (Err error) ->
-            ({model | page = Home, modelForQuestions = newQuestions}, Cmd.none)
+            ({model | page = Home }, Cmd.none)
 
