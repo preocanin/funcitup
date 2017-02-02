@@ -31,7 +31,7 @@ app.get('/api/startQuiz', (req, res) => {
   Question.findAll({
      limit: numberOfQuestions,
      order: [ sequelize.fn('RAND', '') ],
-     include: [ Answer ]
+     include: [ { model: Answer, attributes: ["id", "text"] } ]
   }).then(questions => {
       res.json(questions);
   })
