@@ -18,9 +18,6 @@ def index():
 
 @app.route('/api/questions', methods=['GET'])
 def question_index():
-  question = Question(title="Neki naslov", text="Neki tekst")
-  db.session.add(question)
-  db.session.commit()
   questions = Question.query.all()
   return json_array(questions)
 
@@ -35,3 +32,4 @@ def question_details(question_id):
 
 if __name__ == '__main__':
     app.run()
+
