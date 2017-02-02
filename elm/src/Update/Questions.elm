@@ -10,8 +10,10 @@ import Model.Questions exposing (..)
 updateQuestions : Questions.Msg -> Model.Main.Model -> (Model.Main.Model, Cmd Main.Msg)
 updateQuestions msg model =
     case msg of
-        AllQuestions (Ok questionsModel) -> 
-            ({model | page = Theory }, Cmd.none) 
+        AllQuestions (Ok questionsModel) ->
+            let questions = model.modelForQuestions
+                newQuestionsModel = { questions | questions = questionsModel } in 
+            ({model | page = Quiz, modelForQuestions = newQuestionsModel }, Cmd.none) 
         AllQuestions (Err error) ->
             ({model | page = Home }, Cmd.none)
 
