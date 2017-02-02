@@ -3,6 +3,7 @@ module View.Navigation exposing (..)
 import Html exposing (Html, text, ul, li, div, a, nav, span)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class)
+
 import Bootstrap.Navbar exposing (..)
 import Bootstrap.Grid exposing (containerFluid)
 
