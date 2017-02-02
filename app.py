@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import json
 from models import db
 from models import Question
@@ -10,7 +10,7 @@ db.init_app(app)
 db.create_all()
 
 def json_array(model_array):
-  return json.dumps([m.as_dict() for m in model_array])
+  return jsonify([m.as_dict() for m in model_array])
 
 @app.route('/')
 def index():
@@ -31,7 +31,7 @@ def question_create():
 @app.route('/api/questions/<question_id>')
 def question_details(question_id):
   question = Question.query.filter_by(id=question_id).first_or_404()
-  return question.as_json()
+  return jsonify(question.as_dict())
 
 if __name__ == '__main__':
     app.run()
