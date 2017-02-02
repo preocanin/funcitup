@@ -18,5 +18,5 @@ view model =
         Home -> div [] [ navigation model, home model ]
         Quiz -> div [] [ navigation model, quiz model ]
         Theory -> div [] [ navigation model, theory model ]
-        PageNotFound -> div [] [text "page not found"]
+        PageNotFound -> div [] [navigation model, text "page not found"]
 
