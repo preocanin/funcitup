@@ -37,11 +37,11 @@ navigation model =
                             li [] 
                                 [
                                     a [onClick (MsgForNavigation Theory)] [text "Theory"]
-                                ],
-                            li [] 
-                                [
-                                    a [onClick (MsgForNavigation Home)] [text "Home"]
                                 ]
+--                            li [] 
+--                                [
+--                                    a [onClick (MsgForNavigation Home)] [text "Home"]
+--                                ]
                         ]
                 ]
         ]
