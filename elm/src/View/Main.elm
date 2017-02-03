@@ -1,6 +1,7 @@
 module View.Main exposing (..)
 
 import Html exposing (Html, div, text)
+import Html.Attributes exposing (style)
 
 import Msg.Main exposing (..)
 

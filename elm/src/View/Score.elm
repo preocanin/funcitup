@@ -5,14 +5,16 @@ import Html.Events exposing (onClick)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
 import Bootstrap.Buttons exposing (btn, ButtonOption(..), ButtonSizeModifier(..), ButtonModifier(..))
-import Model.Main exposing (..)
 
+import Model.Main exposing (..)
 
 import Msg.Main as Main exposing (..)
 import Msg.Navigation exposing (..)
 
 score : Model -> Html Main.Msg
 score model =
+    -- Uraditi prikaz model.score : List Score.Model
+    -- Score.Model ima tri polja id, name i points
     container 
       [
                   row 
