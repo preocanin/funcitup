@@ -1,6 +1,7 @@
 module Update.Questions exposing (..)
 
 import List exposing (length, member, map)
+import Tuple exposing (first)
 
 import Msg.Main as Main exposing (..)
 import Msg.Questions as Questions exposing (..)
@@ -49,7 +50,7 @@ updateQuestions msg model =
 
         Answer qid aid ->
             let
-                isMember = member (qid,aid) questionsModel.userAnswers
+                isMember = member qid <| map first questionsModel.userAnswers
                 memberMapFunc = \(x,y) -> if x == qid then (x, aid) else (x,y)
                 newUserAnswers = 
                     if isMember 

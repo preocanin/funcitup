@@ -30,8 +30,12 @@ quiz model =
         container  
                   [
                     questionView questionsModel.dirty <| getQuestion questionsModel,
-                    buttons model
+                    buttons model,
                     -- [Debug]: div [] [text model.modelForQuestions.name]
+                    div []
+                        [
+                            text <| toString questionsModel.userAnswers
+                        ]
                   ]
         ]
 
