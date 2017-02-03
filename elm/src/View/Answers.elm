@@ -14,7 +14,19 @@ import Model.Answer exposing (..)
 viewAnswers : Int -> List Model -> Html Main.Msg
 viewAnswers qid answers =
     div []
-        <| map (answerToRadioButton qid) answers
+        <| map (answerToRadioButton qid) answers ++ [ 
+            div []
+            [
+                label []
+                [
+                    input [ 
+                            type_ "radio", 
+                            name <| toString qid,
+                            checked False
+                          ] [],
+                    text "Ne znam."
+                ]
+            ] ]
        
 
 answerToRadioButton : Int -> Model -> Html Main.Msg
