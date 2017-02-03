@@ -2,8 +2,7 @@ module Command.Main exposing (..)
 
 import Http exposing (post, get, send, stringBody)
 
-import Json.Decode exposing (int)
-
+import Json.Decode exposing (float, field)
 
 import String exposing (concat)
 
@@ -19,8 +18,9 @@ questionsGetAll =
 
 sendScore : Model -> Cmd Main.Msg
 sendScore model =
-    post (concat ["http://localhost:5000/api/endQuiz?name=", model.name])
+    let name = if model.name == "" then "quest" else model.name in
+    post (concat ["http://localhost:5000/api/endQuiz?name=", name])
          (stringBody "application/json" <| resultEncoder model)
-          int  
+         (field "points" float)
         |> send (Main.MsgForQuestions<<Questions.Points)
 

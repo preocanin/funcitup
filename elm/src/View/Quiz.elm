@@ -1,10 +1,10 @@
 module View.Quiz exposing (quiz)
 
-import Html exposing (Html, div, text)
-import Html.Events exposing (onClick)
+import Html exposing (Html, div, text, input)
+import Html.Attributes exposing (value)
+import Html.Events exposing (onClick, onInput)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
-import Bootstrap.Forms exposing (formInput)
 import Bootstrap.Buttons exposing (btn, ButtonOption(..), ButtonSizeModifier(..), ButtonModifier(..))
 
 import List exposing (isEmpty, length)
@@ -30,6 +30,7 @@ quiz model =
                   [
                     questionView <| getQuestion questionsModel,
                     buttons model
+                    -- [Debug]: div [] [text model.modelForQuestions.name]
                   ]
 
 -- Used in buttons function
@@ -61,17 +62,19 @@ buttonBack current =
     else
         div [] []
 
-buttonsScore : Int -> Int -> List (Html Main.Msg)
-buttonsScore current length =
+buttonsScore : String -> Int -> Int -> List (Html Main.Msg)
+buttonsScore name current length =
     if current == length - 1 then
     [
-        formInput [] [],
+        input [
+                onInput (Main.MsgForQuestions<<Questions.Name),
+                value name 
+              ] [],
         btn BtnPrimary
             [BtnSmall]
             []
             [
-                -- Later implementation
-                -- onClick (Main.MsgFroQuestions Questions.SendScore)
+                onClick (Main.MsgForQuestions Questions.SendScore)
             ]
             [text "Score"]
     ]
@@ -121,6 +124,7 @@ buttons model =
                                     ExtraSmall Twelve
                                ]
                                     (buttonsScore
+                                         questionsModel.name
                                          questionsModel.currentQuestion
                                          <| length questionsModel.questions)
                     ]

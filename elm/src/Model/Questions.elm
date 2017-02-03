@@ -16,7 +16,7 @@ type alias Model =
     }
 
 newQuestions : Model
-newQuestions = Model [] [] 0 ""
+newQuestions = Model [] [] 0 "guest"
 
 getQuestion : Model -> Question.Model
 getQuestion model =

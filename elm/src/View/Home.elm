@@ -36,7 +36,10 @@ home model =
                                     ExtraSmall Twelve
                                  ]
                                  [
-
+                                     if model.points == -21 then
+                                         text ""
+                                     else
+                                         text <| toString model.points
                                  ]
                       ],
                   row 
