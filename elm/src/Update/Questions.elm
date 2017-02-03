@@ -61,7 +61,11 @@ updateQuestions msg model =
             let
                 newQuestionsModel = { questionsModel | name = name }
             in
-                ({ model | modelForQuestions = newQuestionsModel}, Cmd.none)
+                ({ model | modelForQuestions = newQuestionsModel}, Cmd.none) 
 
+        Points (Ok points) ->
+            ({model | page = Home, points = points}, Cmd.none)
 
+        Points (Err error) ->
+            ({model | page = PageNotFound}, Cmd.none)
 

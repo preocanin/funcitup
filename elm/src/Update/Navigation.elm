@@ -10,8 +10,9 @@ import Model.Main exposing (..)
 
 updateNavigation : Navigation.Msg -> Model -> (Model, Cmd Main.Msg)
 updateNavigation msg model =
+    let newModel = initialModel in
     case msg of
-        Navigation.Home -> ({model | page = Model.Navigation.Home}, Cmd.none)
-        Navigation.Quiz -> ({model | page = Model.Navigation.Quiz}, questionsGetAll)
-        Navigation.Theory -> ({model | page = Model.Navigation.Theory}, Cmd.none)
+        Navigation.Home -> ({newModel | page = Model.Navigation.Home}, Cmd.none)
+        Navigation.Quiz -> ({newModel | page = Model.Navigation.Quiz}, questionsGetAll)
+        Navigation.Theory -> ({newModel | page = Model.Navigation.Theory}, Cmd.none)
 
