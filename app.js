@@ -41,6 +41,7 @@ app.get('/api/startQuiz', (req, res) => {
 app.post('/api/endQuiz', (req, res) => {
   if(!req.query.name) {
     res.status(500).send({ error: 'You need to provide a name in order to be memorized in the hall of fame scoreboard!' });
+    return;
   }
   var promises = [];
   req.body.forEach(givenAnswer => {
