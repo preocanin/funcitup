@@ -1,4 +1,4 @@
 module Msg.Navigation exposing (..)
 
-type Msg = Home | Quiz | Theory 
+type Msg = Home | Quiz | Theory | Score
 

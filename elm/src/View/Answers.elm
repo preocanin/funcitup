@@ -22,7 +22,7 @@ viewAnswers qid answers =
                     input [ 
                             type_ "radio", 
                             name <| toString qid,
-                            checked False
+                            checked True
                           ] [],
                     text "Ne znam."
                 ]
