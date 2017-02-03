@@ -55,5 +55,17 @@ updateQuestions msg model =
                     else (qid,aid) :: questionsModel.userAnswers 
                 newQuestionsModel = { questionsModel | userAnswers = newUserAnswers }
             in 
-                ({ model | modelForQuestions = newQuestionsModel } , Cmd.none)
+                ({ model | modelForQuestions = newQuestionsModel }, Cmd.none)
+
+        Name name ->
+            let
+                newQuestionsModel = { questionsModel | name = name }
+            in
+                ({ model | modelForQuestions = newQuestionsModel}, Cmd.none) 
+
+        Points (Ok points) ->
+            ({model | page = Home, points = points}, Cmd.none)
+
+        Points (Err error) ->
+            ({model | page = PageNotFound}, Cmd.none)
 
