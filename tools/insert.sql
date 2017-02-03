@@ -21,7 +21,7 @@ VALUES (2, 'Question 2');
   INSERT INTO answers
   VALUES (default, 'Answer 2.3', False, 2);
   INSERT INTO answers
-  VALUES (default, 'Answer 2.4', False, 1);
+  VALUES (default, 'Answer 2.4', False, 2);
 
 
 INSERT INTO questions(id, text)
