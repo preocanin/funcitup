@@ -3,7 +3,7 @@ module Model.Questions exposing (..)
 import List exposing (map, head, drop)
 
 import Json.Decode as Decode exposing (Decoder, oneOf, null, array, list, map3, field)
-import Json.Encode as Encode exposing (Value, list, int, object)
+import Json.Encode as Encode exposing (Value, list, int, object, string)
 
 import Model.Question as Question exposing (..)
 
@@ -11,11 +11,12 @@ type alias Model =
     {
         questions: List Question.Model,
         userAnswers: List (Int,Int),
-        currentQuestion: Int 
+        currentQuestion: Int,
+        name: String
     }
 
 newQuestions : Model
-newQuestions = Model [] [] 0
+newQuestions = Model [] [] 0 ""
 
 getQuestion : Model -> Question.Model
 getQuestion model =
@@ -37,6 +38,9 @@ resultEncoder model =
         toValue = \(qid,aid) -> [("questionId", Encode.int qid),
                                ("questionId", Encode.int aid)] 
     in
-        Encode.list <| List.map (object<<toValue) model.userAnswers   
+        object [
+                    ("name", Encode.string model.name),
+                    ("answers", Encode.list <| List.map (object<<toValue) model.userAnswers)
+               ]
 
 
