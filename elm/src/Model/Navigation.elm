@@ -5,3 +5,4 @@ type Page
   | Quiz
   | Theory
   | PageNotFound
+  | Score
