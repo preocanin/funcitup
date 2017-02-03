@@ -9,7 +9,7 @@ import Model.Main exposing (..)
 import Model.Navigation exposing (..)
 import Model.Questions exposing (..)
 
-import Command.Main exposing (sendScore)
+import Command.Main exposing (sendScore, getScores)
 
 updateQuestions : Questions.Msg -> Model.Main.Model -> (Model.Main.Model, Cmd Main.Msg)
 updateQuestions msg model =
@@ -17,7 +17,7 @@ updateQuestions msg model =
     case msg of
         AllQuestions (Ok questionList) ->
             let 
-                newQuestionsModel = { questionsModel | questions = questionList } 
+                newQuestionsModel = { questionsModel | questions = questionList, dirty = False } 
             in 
                 ({model | page = Quiz, modelForQuestions = newQuestionsModel }, Cmd.none) 
 
@@ -33,7 +33,7 @@ updateQuestions msg model =
                     if questionsModel.currentQuestion+1 < length questionsModel.questions
                     then questionsModel.currentQuestion+1
                     else questionsModel.currentQuestion
-                newQuestionsModel = { questionsModel | currentQuestion = nextQuestion }
+                newQuestionsModel = { questionsModel | currentQuestion = nextQuestion, dirty = False }
             in
                 ({model | modelForQuestions = newQuestionsModel }, Cmd.none) 
             
@@ -43,7 +43,7 @@ updateQuestions msg model =
                     if questionsModel.currentQuestion-1 >= 0 
                     then questionsModel.currentQuestion-1
                     else questionsModel.currentQuestion
-                newQuestionsModel = { questionsModel | currentQuestion = previousQuestion}
+                newQuestionsModel = { questionsModel | currentQuestion = previousQuestion, dirty = False }
             in
                 ({model | modelForQuestions = newQuestionsModel }, Cmd.none) 
 
@@ -55,7 +55,7 @@ updateQuestions msg model =
                     if isMember 
                     then map memberMapFunc questionsModel.userAnswers
                     else (qid,aid) :: questionsModel.userAnswers 
-                newQuestionsModel = { questionsModel | userAnswers = newUserAnswers }
+                newQuestionsModel = { questionsModel | userAnswers = newUserAnswers, dirty = False }
             in 
                 ({ model | modelForQuestions = newQuestionsModel }, Cmd.none)
 
@@ -72,5 +72,5 @@ updateQuestions msg model =
             ({ model | page = PageNotFound, modelForQuestions = newQuestions }, Cmd.none)
 
         SendScore ->
-            (model, sendScore questionsModel)
+            (model, Cmd.batch [getScores, sendScore questionsModel])
 

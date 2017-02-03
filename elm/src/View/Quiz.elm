@@ -26,12 +26,14 @@ quiz model =
     then
         div [] [text "No questions"] 
     else
+        div [] [
         container  
                   [
-                    questionView <| getQuestion questionsModel,
+                    questionView questionsModel.dirty <| getQuestion questionsModel,
                     buttons model
                     -- [Debug]: div [] [text model.modelForQuestions.name]
                   ]
+        ]
 
 -- Used in buttons function
 buttonNextScore : Int -> Int -> Html Main.Msg

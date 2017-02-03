@@ -12,11 +12,12 @@ type alias Model =
         questions: List Question.Model,
         userAnswers: List (Int,Int),
         currentQuestion: Int,
-        name: String
+        name: String,
+        dirty: Bool
     }
 
 newQuestions : Model
-newQuestions = Model [] [] 0 "guest"
+newQuestions = Model [] [] 0 "guest" False
 
 getQuestion : Model -> Question.Model
 getQuestion model =

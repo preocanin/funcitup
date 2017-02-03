@@ -9,6 +9,7 @@ import String exposing (concat)
 import Msg.Main as Main exposing (..)
 import Msg.Questions as Questions exposing (..)
 
+import Model.Main exposing (scoresDecoder)
 import Model.Questions exposing (..)
 
 questionsGetAll : Cmd Main.Msg
@@ -23,4 +24,12 @@ sendScore model =
          (stringBody "application/json" <| resultEncoder model)
          (field "points" float)
         |> send (Main.MsgForQuestions<<Questions.Points)
+
+getScores : Cmd Main.Msg
+getScores =
+    get "http://localhost:5000/api/scores" scoresDecoder
+        |> send Main.MsgForScore
+
+
+
 
