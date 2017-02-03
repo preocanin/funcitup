@@ -9,4 +9,5 @@ type Msg
         | Next
         | Back
         | Answer Int Int 
-
+        | Name String
+        
