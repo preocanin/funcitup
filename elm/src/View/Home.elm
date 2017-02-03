@@ -1,14 +1,17 @@
 module View.Home exposing (..)
 
 import Html exposing (Html, text, h1)
+import Html.Events exposing (onClick)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
 import Bootstrap.Buttons exposing (btn, ButtonOption(..), ButtonSizeModifier(..), ButtonModifier(..))
 
 import Model.Main exposing (..)
-import Msg.Main exposing (..)
 
-home : Model -> Html Msg
+import Msg.Main as Main exposing (..)
+import Msg.Navigation exposing (..)
+
+home : Model -> Html Main.Msg
 home model =
     container  
               [
@@ -45,7 +48,11 @@ home model =
                                     ExtraSmall Twelve
                                  ]
                                  [
-                                    btn BtnPrimary [BtnLarge] [] [] [text "Start quiz!"]
+                                    btn BtnPrimary 
+                                        [BtnLarge] 
+                                        [] 
+                                        [onClick (Main.MsgForNavigation Quiz)] 
+                                        [text "Start quiz!"]
                                  ]
                       ]
               ]
