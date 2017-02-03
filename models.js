@@ -6,12 +6,12 @@ var sequelize = new Sequelize('mysql://dev:123456@localhost:3306/node_dev', {
 });
 
 var Question = sequelize.define('question', {
-  text: Sequelize.STRING
+  text: { type: Sequelize.STRING, allowNull: false }
 });
 
 var Answer = sequelize.define('answer', {
-  text: Sequelize.STRING,
-  isCorrect : Sequelize.BOOLEAN
+  text: { type: Sequelize.STRING, allowNull: false },
+  isCorrect : { type: Sequelize.BOOLEAN, allowNull: false }
 });
 
 Answer.belongsTo(Question); // Adds fk_company to User
