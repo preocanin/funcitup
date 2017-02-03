@@ -57,24 +57,22 @@ VALUES (5, 'Lambda račun je razvio...');
 INSERT INTO questions(id, text)
 VALUES (6, 'Čisto funkcionalni programski jezik može da se posmatra i kao...');
   INSERT INTO answers
-  VALUES (default, 'Answer 6.1', True, 6);
+  VALUES (default, 'Matematička formalizacija algoritma.', True, 6);
   INSERT INTO answers
-  VALUES (default, 'Answer 6.2', False, 6);
+  VALUES (default, 'Objektno orijentisani programski jezik u kome nema klasa.', False, 6);
   INSERT INTO answers
-  VALUES (default, 'Answer 6.3', False, 6);
+  VALUES (default, 'Procesno orijentisani programski jezik u kome nema petlji.', False, 6);
   INSERT INTO answers
-  VALUES (default, 'Answer 6.4', False, 6);
+  VALUES (default, 'Objektno orijentisani jezik sa pokazivačima na funkcije.', False, 6);
 
 INSERT INTO questions(id, text)
-VALUES (7, 'Question 7');
+VALUES (7, 'Lambda račun je...');
   INSERT INTO answers
-  VALUES (default, 'Answer 7.1', True, 7);
+  VALUES (default, 'Apstraktna formalizacija pojma algoritma', True, 7);
   INSERT INTO answers
-  VALUES (default, 'Answer 7.2', False, 7);
+  VALUES (default, 'Račun u kojem koristimo konstantu "Lambda"', False, 7);
   INSERT INTO answers
-  VALUES (default, 'Answer 7.3', False, 7);
-  INSERT INTO answers
-  VALUES (default, 'Answer 7.4', False, 7);
+  VALUES (default, 'Račun sa specijalnim Lambda operatorima za manipulisanje matricama', False, 7);
 
 INSERT INTO questions(id, text)
 VALUES (8, 'Question 8');

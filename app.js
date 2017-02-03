@@ -28,6 +28,15 @@ app.get('/api/questions', function (req, res) {
     })
 })
 
+app.get('/api/scores', (req, res) => {
+  Score.findAll({
+    limit: 10,
+    order: [[ 'points', 'DESC' ]]
+  }).then(scores => {
+    res.json(scores);
+  })
+})
+
 app.get('/api/startQuiz', (req, res) => {
   Question.findAll({
      limit: numberOfQuestions,
