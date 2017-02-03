@@ -14,6 +14,11 @@ var Answer = sequelize.define('answer', {
   isCorrect : { type: Sequelize.BOOLEAN, allowNull: false }
 });
 
+var Score = sequelize.define('score', {
+  name: { type: Sequelize.STRING, allowNull: false },
+  points: { type: Sequelize.DOUBLE, allowNull: false }
+});
+
 Answer.belongsTo(Question);
 Question.hasMany(Answer)
 
@@ -22,5 +27,6 @@ sequelize.sync({force: true});
 module.exports = {
   Answer: Answer,
   Question: Question,
+  Score: Score,
   sequelize: sequelize
 }
