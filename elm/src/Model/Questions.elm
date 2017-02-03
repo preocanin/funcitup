@@ -3,7 +3,7 @@ module Model.Questions exposing (..)
 import List exposing (map, head, drop)
 
 import Json.Decode as Decode exposing (Decoder, oneOf, null, array, list, map3, field)
-import Json.Encode as Encode exposing (Value, list, int, object, string)
+import Json.Encode as Encode exposing (Value, encode, list, int, object, string)
 
 import Model.Question as Question exposing (..)
 
@@ -30,17 +30,13 @@ getQuestion model =
 questionsDecoder : Decode.Decoder (List Question.Model)
 questionsDecoder =
     Decode.list Question.questionDecoder
-        
 
-resultEncoder : Model -> Encode.Value 
+resultEncoder : Model -> String 
 resultEncoder model =
     let
         toValue = \(qid,aid) -> [("questionId", Encode.int qid),
-                               ("questionId", Encode.int aid)] 
+                               ("answerId", Encode.int aid)] 
     in
-        object [
-                    ("name", Encode.string model.name),
-                    ("answers", Encode.list <| List.map (object<<toValue) model.userAnswers)
-               ]
+        encode 0 (Encode.list <| List.map (object<<toValue) model.userAnswers)
 
 
