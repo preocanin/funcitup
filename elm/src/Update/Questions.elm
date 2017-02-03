@@ -9,6 +9,8 @@ import Model.Main exposing (..)
 import Model.Navigation exposing (..)
 import Model.Questions exposing (..)
 
+import Command.Main exposing (sendScore)
+
 updateQuestions : Questions.Msg -> Model.Main.Model -> (Model.Main.Model, Cmd Main.Msg)
 updateQuestions msg model =
     let questionsModel = model.modelForQuestions in
@@ -64,8 +66,11 @@ updateQuestions msg model =
                 ({ model | modelForQuestions = newQuestionsModel}, Cmd.none) 
 
         Points (Ok points) ->
-            ({model | page = Home, points = points}, Cmd.none)
+            ({ model | page = Home, points = points, modelForQuestions = newQuestions }, Cmd.none)
 
         Points (Err error) ->
-            ({model | page = PageNotFound}, Cmd.none)
+            ({ model | page = PageNotFound, modelForQuestions = newQuestions }, Cmd.none)
+
+        SendScore ->
+            (model, sendScore questionsModel)
 

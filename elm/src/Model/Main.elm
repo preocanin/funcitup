@@ -8,11 +8,11 @@ type alias Model =
         { 
             page: Page,
             modelForQuestions: Questions.Model,
-            points: Int
+            points: Float
         }
 
 initialModel : Model
-initialModel = Model Home newQuestions 0
+initialModel = Model Home newQuestions -21
 
 init : (Model, Cmd Msg)
 init = (initialModel, Cmd.none)
