@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var Question = require('./models').Question;
 var Answer = require('./models').Answer;
+var Score = require('./models').Score;
 var path = require('path');
 var sequelize = require('./models').sequelize;
 var bodyParser = require('body-parser');
@@ -38,7 +39,10 @@ app.get('/api/startQuiz', (req, res) => {
 })
 
 app.post('/api/endQuiz', (req, res) => {
-  var points = 0;
+  if(!req.query.name) {
+    res.status(500).send({ error: 'You need to provide a name in order to be memorized in the hall of fame scoreboard!' });
+    return;
+  }
   var promises = [];
   req.body.forEach(givenAnswer => {
     promises.push(Question.findOne({ where: { id: givenAnswer.questionId }, include: [ Answer ] })
@@ -50,8 +54,10 @@ app.post('/api/endQuiz', (req, res) => {
     }));
   });
 
-  Promise.all(promises).then((resolvedValues) => { 
-    res.json({ points: _.sum(resolvedValues) }) 
+  Promise.all(promises).then((resolvedValues) => {
+    var points = _.sum(resolvedValues) - ((resolvedValues.length - _.sum(resolvedValues)) * 0.5);
+    Score.create({ name: req.query.name, points: points })
+      .then(() => { res.json({ points: points}) });
   });
 })
 
