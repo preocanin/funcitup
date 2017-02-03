@@ -8,16 +8,16 @@ type alias Model =
     {
         id: Int,
         text: String,
-        answerrs: List Answer.Model
+        answers: List Answer.Model
     }
 
 newQuestion : Model
-newQuestion = Model 0 "" []
+newQuestion = Model 0 "" [] 
 
 questionDecoder : Decoder Model
 questionDecoder =
     map3 Model
         (field "id" int)
         (field "text" string)
-        (field "answers" <| list Answer.answerDecoder)
+        (field "answers" (list Answer.answerDecoder))
 

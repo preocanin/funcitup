@@ -1,8 +1,8 @@
 module Model.Questions exposing (..)
 
-import List exposing (map)
+import List exposing (map, head, drop)
 
-import Json.Decode as Decode exposing (Decoder, null, list, map3, field)
+import Json.Decode as Decode exposing (Decoder, oneOf, null, array, list, map3, field)
 import Json.Encode as Encode exposing (Value, list, int, object)
 
 import Model.Question as Question exposing (..)
@@ -17,12 +17,19 @@ type alias Model =
 newQuestions : Model
 newQuestions = Model [] [] 0
 
-questionsDecoder : Decode.Decoder Model
+getQuestion : Model -> Question.Model
+getQuestion model =
+    let
+        question = head <| drop model.currentQuestion model.questions
+    in
+        case question of
+            Just q -> q
+            Nothing -> Question.newQuestion
+
+questionsDecoder : Decode.Decoder (List Question.Model)
 questionsDecoder =
-    Decode.map3 Model
-        (Decode.field "questions" <| Decode.list Question.questionDecoder)
-        (Decode.field "userAnswers" <| Decode.null [])
-        (Decode.field "currentQuestion" <| Decode.null 0)
+    Decode.list Question.questionDecoder
+        
 
 resultEncoder : Model -> Encode.Value 
 resultEncoder model =
@@ -31,4 +38,5 @@ resultEncoder model =
                                ("questionId", Encode.int aid)] 
     in
         Encode.list <| List.map (object<<toValue) model.userAnswers   
+
 
