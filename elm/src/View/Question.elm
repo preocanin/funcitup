@@ -1,7 +1,8 @@
 module View.Question exposing (..)
 
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, text, h4)
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (class)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
 
@@ -14,31 +15,19 @@ import View.Answers exposing (..)
 
 questionView : Bool -> Model -> Html Main.Msg
 questionView dirty model =
-    div [] 
+    div [ class "question"] 
             [
                 row
                     [
-                        column [
-                                    Large      Twelve,
-                                    Medium     Twelve,
-                                    Small      Twelve,
-                                    ExtraSmall Twelve
-                               ]
-                               [
-                                    text model.text      
-                               ]
+                        column 
+                            [ Medium Six ]
+                            [ h4 [] [text model.text] ]
                     ],
                 row
                     [
-                        column [
-                                    Large      Twelve,
-                                    Medium     Twelve,
-                                    Small      Twelve,
-                                    ExtraSmall Twelve
-                               ]
-                               [
-                                    viewAnswers dirty model.id model.answers
-                               ]
+                        column 
+                            [ Medium Six ]
+                            [ viewAnswers dirty model.id model.answers ]
                     ]
             ]
 

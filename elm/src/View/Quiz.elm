@@ -1,7 +1,7 @@
 module View.Quiz exposing (quiz)
 
-import Html exposing (Html, div, text, input)
-import Html.Attributes exposing (value)
+import Html exposing (Html, div, text, input, label, form)
+import Html.Attributes exposing (value, class,attribute, style, for)
 import Html.Events exposing (onClick, onInput)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
@@ -30,23 +30,35 @@ quiz model =
         container  
                   [
                     questionView questionsModel.dirty <| getQuestion questionsModel,
+                    progress model,
                     buttons model
-                    -- [Debug]: div [] [text model.modelForQuestions.name]
                   ]
         ]
 
+
+progress model =
+    let 
+        prog = ( toFloat model.modelForQuestions.currentQuestion / toFloat (length model.modelForQuestions.questions)) 
+    in
+    div [class "row"] [
+    div [ class "col-md-6"] 
+    [
+        div [ class "row text-center"] [text (toString (model.modelForQuestions.currentQuestion + 1)) ,text "/",text (toString <| length model.modelForQuestions.questions)],
+        div [ class "row progress" ]
+        [ 
+            div [ class "progress-bar", attribute  "role" "progressbar", attribute "aria-valuenow" (toString prog),attribute "aria-valuemin" "0", attribute "aria-valuemax" "100", style [ ( "width", (toString (prog*100))++"%" ) ] ]
+            [ text ((toString (prog*100))++"%") ]
+        ]
+    ]
+    ]
 -- Used in buttons function
 buttonNextScore : Int -> Int -> Html Main.Msg
 buttonNextScore current length =
     if current /= length - 1 then
         -- Not last question
-        btn BtnPrimary
-            [BtnSmall]
-            []
-            [
-                onClick (Main.MsgForQuestions  Questions.Next)
-            ]
-            [text "Next"]
+        btn BtnPrimary [ BtnSmall ] [ ] 
+            [ onClick (Main.MsgForQuestions  Questions.Next), class "pull-right"]
+            [ text "Next" ]
     else
         div [] [] 
 
@@ -54,13 +66,9 @@ buttonNextScore current length =
 buttonBack : Int -> Html Main.Msg
 buttonBack current =
     if current /= 0 then
-        btn BtnPrimary
-            [BtnSmall]
-            []
-            [
-                onClick (Main.MsgForQuestions  Questions.Back)
-            ]
-            [text "Back"]
+        btn BtnPrimary [ BtnSmall ] []
+            [ onClick (Main.MsgForQuestions  Questions.Back), class "pull-left" ]
+            [ text "Back" ]
     else
         div [] []
 
@@ -68,17 +76,18 @@ buttonsScore : String -> Int -> Int -> List (Html Main.Msg)
 buttonsScore name current length =
     if current == length - 1 then
     [
-        input [
-                onInput (Main.MsgForQuestions<<Questions.Name),
-                value name 
-              ] [],
-        btn BtnPrimary
-            [BtnSmall]
-            []
-            [
-                onClick (Main.MsgForQuestions Questions.SendScore)
-            ]
-            [text "Score"]
+        div [class "form-inline"] [  
+                label [] [ text "Name: " ],
+                input 
+                    [   class "form-control",
+                        onInput (Main.MsgForQuestions<<Questions.Name),
+                        value name 
+                    ] [],
+
+        btn BtnPrimary [BtnSmall] []
+            [ onClick (Main.MsgForQuestions Questions.SendScore) ]
+            [text "Submit"]
+        ]
     ]
     else
         [div [] []]
@@ -87,47 +96,29 @@ buttons : Model -> Html Main.Msg
 buttons model =
     let questionsModel = model.modelForQuestions
     in
-                row
+    row [
+        row
+            [
+                column [ Medium Six ]
                     [
-                        column [
-                                    Large      Twelve,
-                                    Medium     Twelve,
-                                    Small      Twelve,
-                                    ExtraSmall Twelve
-                               ]
-                               [
-                                    column [
-                                                Large      Six,
-                                                Medium     Six,
-                                                Small      Six,
-                                                ExtraSmall Six 
-                                           ]
-                                           [
-                                               buttonBack 
-                                                    questionsModel.currentQuestion
-                                           ],
-                                    column [
-                                                Large      Six,
-                                                Medium     Six,
-                                                Small      Six,
-                                                ExtraSmall Six
-                                           ]
-                                           [
-                                               buttonNextScore
-                                                    questionsModel.currentQuestion
-                                                    <| length questionsModel.questions
-                                           ]
-                                   
-                               ],
-                        column [
-                                    Large      Twelve,
-                                    Medium     Twelve,
-                                    Small      Twelve,
-                                    ExtraSmall Twelve
-                               ]
-                                    (buttonsScore
-                                         questionsModel.name
-                                         questionsModel.currentQuestion
-                                         <| length questionsModel.questions)
+                        column []
+                            [
+                                buttonBack questionsModel.currentQuestion
+                            ],
+                        column []
+                            [
+                                buttonNextScore
+                                    questionsModel.currentQuestion
+                                    <| length questionsModel.questions
+                            ]
+                        
                     ]
- 
+            ],
+             row
+             [   div [ class "col-md-12 score-submit" ]
+                            (buttonsScore
+                                    questionsModel.name
+                                    questionsModel.currentQuestion
+                                    <| length questionsModel.questions)
+            ]
+        ]

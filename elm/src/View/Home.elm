@@ -1,6 +1,7 @@
 module View.Home exposing (..)
 
-import Html exposing (Html, div, text, h1)
+import Html exposing (Html, div, text, h1, p)
+import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
@@ -25,7 +26,14 @@ home model =
                                     ExtraSmall Twelve
                                  ]
                                  [
-                                    h1 [] [text "Welcome to Funcitup!"] 
+                                    h1 [] [text "Welcome to Funcitup!"],
+
+                                    div [ class "jumbotron"] [
+                                        p [] 
+                                        [text "Funcitup is a quiz site for checking your knowladge in functional programming theory."],
+                                        p []
+                                        [text "You will be asked 10 questions and at the end, you'll see how you compare to other players."]
+                                    ]
                                  ]
                       ],
                   row 
@@ -40,7 +48,7 @@ home model =
                                     btn BtnPrimary 
                                         [BtnLarge] 
                                         [] 
-                                        [onClick (Main.MsgForNavigation Quiz)] 
+                                        [onClick (Main.MsgForNavigation Quiz), class "start-quiz-btn"] 
                                         [text "Start quiz!"]
                                  ]
                       ]

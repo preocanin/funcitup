@@ -39,11 +39,10 @@ app.get('/api/scores', (req, res) => {
 
 app.get('/api/startQuiz', (req, res) => {
   Question.findAll({
-     limit: numberOfQuestions,
      order: [ sequelize.fn('RAND') ],
      include: [ { model: Answer, attributes: ["id", "text"] } ]
   }).then(questions => {
-      res.json(questions);
+      res.json(_.slice(questions, 0, 10));
   })
 })
 

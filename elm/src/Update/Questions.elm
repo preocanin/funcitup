@@ -49,7 +49,7 @@ updateQuestions msg model =
 
         Answer qid aid ->
             let
-                isMember = member (qid,aid) questionsModel.userAnswers
+                isMember = member qid (map (\(x,_) -> x) questionsModel.userAnswers )
                 memberMapFunc = \(x,y) -> if x == qid then (x, aid) else (x,y)
                 newUserAnswers = 
                     if isMember 
