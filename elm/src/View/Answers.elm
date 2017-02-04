@@ -1,10 +1,10 @@
 module View.Answers exposing (viewAnswers)
 
 import Html exposing (Html, div, input, label, text)
-import Html.Attributes exposing (type_, name, checked)
+import Html.Attributes exposing (type_, name, checked, value)
 import Html.Events exposing (onClick)
-
-import List exposing (isEmpty, map)
+import String exposing (isEmpty)
+import List exposing (map)
 
 import Msg.Main as Main exposing (..)
 import Msg.Questions as Questions exposing (..)
@@ -21,7 +21,7 @@ answerToRadioButton dirty qid answer =
 
     
 radio : Bool -> Int -> String -> Main.Msg -> Html Main.Msg
-radio dirty qid value msg =
+radio dirty qid answerText msg =
     div []
         [
             if qid >= 0 then
@@ -30,11 +30,12 @@ radio dirty qid value msg =
                     input [ 
                             type_ "radio", 
                             name <| toString qid,
-                            checked dirty,
-                            onClick msg
+                            checked (isEmpty answerText),
+                            onClick msg,
+                            value answerText
                           ]
                           [],
-                    text value 
+                    text answerText 
                   ]
             else
                 div [] [] 

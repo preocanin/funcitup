@@ -22,7 +22,7 @@ var Score = sequelize.define('score', {
 Answer.belongsTo(Question);
 Question.hasMany(Answer)
 
-sequelize.sync({force: false});
+sequelize.sync({force: true});
 
 module.exports = {
   Answer: Answer,

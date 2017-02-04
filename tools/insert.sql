@@ -217,5 +217,12 @@ VALUES (20, 'Nedeterminističke funkcije su...');
   INSERT INTO answers
   VALUES (default, 'Funkcije iz biblioteke "Undetermined"', False, 20);
 
+insert into scores values(default, 'Curry', 10);
+insert into scores values(default, 'Curry', 10);
+insert into scores values(default, 'Alonzo', 9);
+insert into scores values(default, 'Alan', 9.5);
+insert into scores values(default, 'David', 8);
+insert into scores values(default, 'Martin', 7);
+insert into scores values(default, 'Slavoljub', -5);
 
 
