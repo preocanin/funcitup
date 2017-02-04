@@ -15,5 +15,5 @@ updateNavigation msg model =
         Navigation.Home -> ({newModel | page = Model.Navigation.Home}, Cmd.none)
         Navigation.Quiz -> ({newModel | page = Model.Navigation.Quiz}, questionsGetAll)
         Navigation.Theory -> ({newModel | page = Model.Navigation.Theory}, Cmd.none)
-        Navigation.Score -> ( {newModel | page = Model.Navigation.Score}, Cmd.none)
+        Navigation.Score -> ( {newModel | page = Model.Navigation.Score}, getScores)
 

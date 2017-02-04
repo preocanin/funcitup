@@ -13,3 +13,5 @@
 .start-quiz-btn {
   margin-top:20px;
 }
+
+a { cursor: pointer; cursor: hand; }
