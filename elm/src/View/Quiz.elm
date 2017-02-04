@@ -1,7 +1,7 @@
 module View.Quiz exposing (quiz)
 
 import Html exposing (Html, div, text, input, label, form)
-import Html.Attributes exposing (value, class,attribute, style, for)
+import Html.Attributes exposing (value, class,attribute, style, for, required)
 import Html.Events exposing (onClick, onInput)
 
 import Bootstrap.Grid exposing (container, row, column, ColumnType(..), ColumnSize(..))
@@ -81,16 +81,17 @@ buttonsScore name current length =
                 input 
                     [   class "form-control",
                         onInput (Main.MsgForQuestions<<Questions.Name),
+                        required True,
                         value name 
                     ] [],
 
         btn BtnPrimary [BtnSmall] []
-            [ onClick (Main.MsgForQuestions Questions.SendScore) ]
+            [ onClick (Main.MsgForQuestions Questions.SendScore), attribute "type" "submit" ]
             [text "Submit"]
         ]
     ]
     else
-        [div [] []]
+        [form [] []]
 
 buttons : Model -> Html Main.Msg
 buttons model =

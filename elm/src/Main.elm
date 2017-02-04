@@ -17,15 +17,3 @@ main = Html.program {
             update = Update.Main.update,
             subscriptions = \_ -> Sub.none
        }
-
--- Init
--- init: (Model, Cmd Msg)
-
--- Update 
--- update : Msg -> Model -> (Model, Cmd Msg)
-
--- View
--- view : Model -> Html Msg
-
--- Subscriptions
--- subscriptions : Model -> Sub Msg
