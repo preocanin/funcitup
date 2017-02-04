@@ -37,6 +37,10 @@ navigation model =
                             li [] 
                                 [
                                     a [onClick (MsgForNavigation Theory)] [text "Theory"]
+                                ],
+                            li []
+                                [
+                                    a [onClick (MsgForNavigation Score)] [text "Highscores"]
                                 ]
                         ]
                 ]

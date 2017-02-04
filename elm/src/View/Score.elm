@@ -16,8 +16,6 @@ import Msg.Navigation exposing (..)
 
 score : Model.Main.Model -> Html Main.Msg
 score model =
-    -- Uraditi prikaz model.score : List Score.Model
-    -- Score.Model ima tri polja id, name i points
     container 
         [
             row 
