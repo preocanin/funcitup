@@ -1,10 +1,6 @@
 module Main exposing(..)
 
-import Html exposing (text, ul, li, div, a, span, nav)
-import Html.Events exposing (onClick)
-import Html.Attributes exposing (class)
-import Bootstrap.Navbar exposing (..)
-import Bootstrap.Grid exposing (containerFluid)
+import Html 
 
 import Msg.Main exposing (..)
 import Model.Main exposing (..)
